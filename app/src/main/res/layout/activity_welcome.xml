@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_welcome"
+    android:padding="24dp">
+
+    <!-- CORAÇÕES SUPERIORES -->
+    <ImageView
+        android:id="@+id/imgHearts"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/hearts" />
+
+    <!-- TEXTO -->
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgHearts"
+        android:layout_marginTop="24dp"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="Perto, mesmo\nquando longe"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp" />
+
+    <!-- BOTÃO CRIAR CONTA -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/btn_gradient_red"
+        android:text="Criar Conta"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:cornerRadius="30dp"
+        app:elevation="8dp" />
+
+    <!-- BOTÃO ENTRAR -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@id/btnRegister"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_gradient_red"
+        android:text="Entrar"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:cornerRadius="30dp"
+        app:elevation="8dp" />
+
+</RelativeLayout>
