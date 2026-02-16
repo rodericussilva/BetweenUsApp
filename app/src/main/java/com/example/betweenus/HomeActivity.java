@@ -1,39 +1,42 @@
 package com.example.betweenus;
 
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button btnAgenda;
-    private Button btnChat;
-    private Button btnMural;
+    private LinearLayout menuCalendar, menuChat, menuMural;
+    private CardView cardLoveLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btnAgenda = findViewById(R.id.btnAgenda);
-        btnChat = findViewById(R.id.btnChat);
-        btnMural = findViewById(R.id.btnMural);
+        // 🔹 MENU
+        menuCalendar = findViewById(R.id.menuCalendar);
+        menuChat = findViewById(R.id.menuChat);
+        menuMural = findViewById(R.id.menuMural);
 
-        btnAgenda.setOnClickListener(v -> openAgenda());
-        btnChat.setOnClickListener(v -> openChat());
-        btnMural.setOnClickListener(v -> openMural());
-    }
+        // 🔹 CARD
+        cardLoveLanguage = findViewById(R.id.cardLoveLanguage);
 
-    private void openAgenda() {
-        // Segunda prova
-    }
+        // 🧭 MENU CLICK
+        menuCalendar.setOnClickListener(v ->
+                Toast.makeText(this, "Abrir Calendário", Toast.LENGTH_SHORT).show());
 
-    private void openChat() {
-        // Terceira prova
-    }
+        menuChat.setOnClickListener(v ->
+                Toast.makeText(this, "Abrir Chat", Toast.LENGTH_SHORT).show());
 
-    private void openMural() {
-        // Terceira prova
+        menuMural.setOnClickListener(v ->
+                Toast.makeText(this, "Abrir Mural", Toast.LENGTH_SHORT).show());
+
+        // 🧾 CARD CLICK
+        cardLoveLanguage.setOnClickListener(v ->
+                Toast.makeText(this, "Abrir Linguagens do Amor", Toast.LENGTH_SHORT).show());
     }
 }

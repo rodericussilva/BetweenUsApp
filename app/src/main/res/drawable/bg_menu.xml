@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fundo branco -->
+    <solid android:color="#FFFFFF" />
+
+    <!-- Cantos arredondados apenas em cima -->
+    <corners
+        android:topLeftRadius="26dp"
+        android:topRightRadius="26dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp" />
+
+</shape>
