@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_welcome"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 💕 TOPO -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+
+            <!-- Banner -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/banner_placeholder" />
+
+            <!-- Fotos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgUser"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:layout_marginEnd="-24dp"
+                    android:background="@drawable/circle_placeholder"
+                    android:elevation="10dp" />
+
+                <ImageView
+                    android:id="@+id/imgPartner"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:background="@drawable/circle_placeholder"
+                    android:elevation="10dp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- 💗 NOME DO CASAL -->
+        <TextView
+            android:id="@+id/tvCoupleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rodrigo ❤️ Niuara"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#111"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"/>
+
+        <!-- ⏳ TEMPO JUNTOS -->
+        <TextView
+            android:id="@+id/tvTogetherTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"
+            android:text="Juntos há 31 dias"
+            android:textColor="#F4F2F2"
+            android:textSize="16sp" />
+
+        <!-- 📅 DATAS IMPORTANTES -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:elevation="6dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Datas importantes"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#111"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvBirthdays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Aniversários: —"
+                    android:textSize="15sp"
+                    android:textColor="#444"/>
+
+                <TextView
+                    android:id="@+id/tvRelationshipStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Início do namoro: —"
+                    android:textSize="15sp"
+                    android:textColor="#444"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 📍 ENDEREÇOS -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="6dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="Endereços compartilhados"
+                    android:textColor="#0D0000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvContainerAdress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="—"
+                    android:textSize="15sp"
+                    android:textColor="#444"/>
+
+                <LinearLayout
+                    android:id="@+id/containerAddresses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 💞 LINGUAGENS DO AMOR -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="32dp"
+            android:elevation="6dp"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Linguagens do Amor"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#111"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvLoveLanguages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="—"
+                    android:textSize="15sp"
+                    android:textColor="#444"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>
