@@ -56,4 +56,17 @@
         app:cornerRadius="30dp"
         app:elevation="8dp" />
 
+    <!-- BOTÃO TENHO CÓDIGO -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnHaveCode"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@id/btnLogin"
+        android:layout_marginBottom="20dp"
+        android:text="Tenho um código de pareamento"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:background="@drawable/btn_gradient_red"
+        app:cornerRadius="30dp" />
+
 </RelativeLayout>
