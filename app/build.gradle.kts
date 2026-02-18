@@ -4,12 +4,14 @@ plugins {
 
 android {
     namespace = "com.example.betweenus"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.betweenus"
-        minSdk = 35
-        targetSdk = 35
+
+        minSdk = 24
+        targetSdk = 34
+
         versionCode = 1
         versionName = "1.0"
 
@@ -25,6 +27,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -35,6 +38,10 @@ dependencies {
 
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.drawerlayout:drawerlayout:1.2.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
