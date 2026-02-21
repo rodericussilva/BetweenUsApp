@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -18,11 +17,13 @@ public class HomeActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         setContentView(R.layout.activity_home);
 
         // 🔹 MENU PRINCIPAL
@@ -36,11 +37,6 @@ public class HomeActivity extends AppCompatActivity {
         // 🔥 DRAWER
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
-        toolbar = findViewById(R.id.toolbar);
-
-        // 🔥 ABRIR MENU PELO ÍCONE
-        toolbar.setNavigationOnClickListener(v ->
-                drawerLayout.openDrawer(navigationView));
 
         // 🧭 MENU CLICK
         menuCalendar.setOnClickListener(v ->
