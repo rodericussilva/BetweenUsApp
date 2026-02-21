@@ -48,6 +48,8 @@
             android:clickable="true"
             android:focusable="false"
             android:hint="Selecione a data"
+            android:textColor="#1A1A1A"
+            android:textColorHint="#1D1D1D"
             android:padding="16dp" />
 
         <!-- Data início namoro -->
@@ -69,7 +71,9 @@
             android:clickable="true"
             android:focusable="false"
             android:hint="Selecione a data"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textColor="#1A1A1A"
+            android:textColorHint="#1D1D1D" />
 
         <!-- Endereços -->
         <TextView
