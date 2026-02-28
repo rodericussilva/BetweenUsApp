@@ -4,16 +4,16 @@
     <item
         android:id="@+id/navCoupleProfile"
         android:title="Perfil do casal"
-        android:icon="@drawable/ic_profile"/>
+        android:icon="@android:drawable/ic_menu_myplaces" />
 
     <item
         android:id="@+id/navPairCode"
         android:title="Gerar código de pareamento"
-        android:icon="@drawable/ic_code"/>
+        android:icon="@android:drawable/ic_menu_manage" />
 
     <item
         android:id="@+id/navAbout"
         android:title="Sobre o aplicativo"
-        android:icon="@drawable/ic_info"/>
+        android:icon="@android:drawable/ic_menu_info_details" />
 
 </menu>

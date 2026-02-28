@@ -1,6 +1,7 @@
 package com.example.betweenus;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -18,12 +19,16 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    private ImageView btnMenu; // 🔥 BOTÃO HAMBÚRGUER
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
         setContentView(R.layout.activity_home);
 
         // 🔹 MENU PRINCIPAL
@@ -37,6 +42,16 @@ public class HomeActivity extends AppCompatActivity {
         // 🔥 DRAWER
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
+
+        // 🔥 BOTÃO MENU
+        btnMenu = findViewById(R.id.btnMenu);
+
+        // ====================================
+        // 🍔 ABRIR MENU LATERAL
+        // ====================================
+        btnMenu.setOnClickListener(v ->
+                drawerLayout.openDrawer(navigationView)
+        );
 
         // 🧭 MENU CLICK
         menuCalendar.setOnClickListener(v ->
@@ -52,7 +67,9 @@ public class HomeActivity extends AppCompatActivity {
         cardLoveLanguage.setOnClickListener(v ->
                 Toast.makeText(this, "Abrir Linguagens do Amor", Toast.LENGTH_SHORT).show());
 
+        // ====================================
         // 🔥 MENU LATERAL CLICK
+        // ====================================
         navigationView.setNavigationItemSelectedListener(item -> {
 
             int id = item.getItemId();

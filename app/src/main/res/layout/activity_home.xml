@@ -206,7 +206,12 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@drawable/bg_menu"
+        android:elevation="16dp"
+
         app:itemIconTint="@null"
-        app:menu="@menu/menu_drawer"/>
+        app:itemTextColor="#4A6FA5"
+        app:itemIconSize="32dp"
+
+        app:menu="@menu/menu_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
