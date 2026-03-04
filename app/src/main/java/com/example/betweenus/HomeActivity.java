@@ -69,7 +69,8 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Abrir Mural", Toast.LENGTH_SHORT).show());
 
         cardLoveLanguage.setOnClickListener(v ->
-                Toast.makeText(this, "Abrir Linguagens do Amor", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(this, LoveLanguageActivity.class))
+        );
 
         navigationView.setNavigationItemSelectedListener(item -> {
 

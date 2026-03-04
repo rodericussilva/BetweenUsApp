@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_welcome"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- TÍTULO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="As 5 Linguagens do Amor"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#222"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- 1 -->
+        <TextView
+            style="@style/LoveTitle"
+            android:text="1. Palavras de Afirmação"/>
+
+        <TextView
+            style="@style/LoveText"
+            android:text="Expressar amor através de elogios, encorajamento e palavras positivas. Pessoas com essa linguagem valorizam ouvir o quanto são importantes."/>
+
+        <!-- 2 -->
+        <TextView
+            style="@style/LoveTitle"
+            android:text="2. Tempo de Qualidade"/>
+
+        <TextView
+            style="@style/LoveText"
+            android:text="Dar atenção total ao parceiro, compartilhar momentos significativos e conversas profundas sem distrações."/>
+
+        <!-- 3 -->
+        <TextView
+            style="@style/LoveTitle"
+            android:text="3. Atos de Serviço"/>
+
+        <TextView
+            style="@style/LoveText"
+            android:text="Demonstrar amor através de ações práticas, como ajudar em tarefas ou fazer algo que facilite a vida do parceiro."/>
+
+        <!-- 4 -->
+        <TextView
+            style="@style/LoveTitle"
+            android:text="4. Presentes"/>
+
+        <TextView
+            style="@style/LoveText"
+            android:text="Oferecer algo simbólico que represente carinho e lembrança. O valor está no significado, não no preço."/>
+
+        <!-- 5 -->
+        <TextView
+            style="@style/LoveTitle"
+            android:text="5. Toque Físico"/>
+
+        <TextView
+            style="@style/LoveText"
+            android:text="Demonstrar amor através de abraços, beijos e contato físico que transmite segurança e proximidade."/>
+
+    </LinearLayout>
+</ScrollView>

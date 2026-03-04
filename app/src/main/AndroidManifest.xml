@@ -40,7 +40,11 @@
 
         <activity
             android:name=".PairCodeActivity"
-            android:exported="true"/>
+            android:exported="true" />
+
+        <activity
+            android:name=".LoveLanguageActivity"
+            android:exported="true" />
 
     </application>
 
