@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_welcome">
+
+    <!-- TÍTULO -->
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Código de Pareamento"
+        android:textSize="22sp"
+        android:textColor="#222"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/txtCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="120dp"/>
+
+    <!-- CÓDIGO -->
+    <TextView
+        android:id="@+id/txtCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="------"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:textColor="#333"
+        android:letterSpacing="0.2"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <!-- BOTÃO GERAR -->
+    <Button
+        android:id="@+id/btnGenerate"
+        android:layout_width="240dp"
+        android:layout_height="56dp"
+        android:text="Gerar Código"
+        android:textColor="#FFF"
+        android:background="@drawable/btn_gradient_red"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@id/txtCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp"/>
+
+    <!-- BOTÃO COPIAR -->
+    <Button
+        android:id="@+id/btnCopy"
+        android:layout_width="240dp"
+        android:layout_height="56dp"
+        android:text="Copiar Código"
+        android:textColor="#FFF"
+        android:background="@drawable/btn_green_rounded"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@id/btnGenerate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
