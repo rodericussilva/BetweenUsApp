@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- SELECIONADO -->
+    <item android:state_checked="true">
+        <layer-list>
+
+            <!-- CÍRCULO EXTERNO -->
+            <item>
+                <shape android:shape="oval">
+                    <size
+                        android:width="24dp"
+                        android:height="24dp"/>
+                    <stroke
+                        android:width="2dp"
+                        android:color="#FFFFFF"/>
+                    <solid android:color="#FFFFFF"/>
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+
+    <!-- NÃO SELECIONADO -->
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="24dp"
+                android:height="24dp"/>
+            <stroke
+                android:width="2dp"
+                android:color="#FFFFFF"/>
+            <solid android:color="@android:color/transparent"/>
+        </shape>
+    </item>
+
+</selector>

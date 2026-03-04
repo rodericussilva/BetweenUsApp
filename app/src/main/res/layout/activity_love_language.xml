@@ -2,10 +2,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_welcome"
-    android:padding="20dp">
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="32dp">
 
     <LinearLayout
+        android:id="@+id/layoutIntro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -14,56 +19,300 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="As 5 Linguagens do Amor"
+            android:text="Linguagens do Amor"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#222"
-            android:layout_marginBottom="20dp"/>
+            android:textColor="#FFFF"
+            android:layout_marginBottom="16dp"/>
 
-        <!-- 1 -->
+        <!-- INTRODUÇÃO -->
         <TextView
-            style="@style/LoveTitle"
-            android:text="1. Palavras de Afirmação"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="As Linguagens do Amor são um conceito criado por Gary Chapman no livro As Cinco Linguagens do Amor. A ideia central é simples: cada pessoa tem maneiras diferentes de expressar e perceber o amor. Quando entendemos a nossa própria linguagem e a de quem está ao nosso lado, a comunicação emocional se torna mais clara, profunda e verdadeira.\n\nNo contexto de um relacionamento, especialmente à distância, compreender essas diferenças pode fortalecer o vínculo, reduzir conflitos e aumentar a sensação de conexão."
+            android:textSize="16sp"
+            android:textColor="#FFFF"
+            android:layout_marginBottom="24dp"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="6dp"
+            android:textAlignment="viewStart"/>
 
-        <TextView
-            style="@style/LoveText"
-            android:text="Expressar amor através de elogios, encorajamento e palavras positivas. Pessoas com essa linguagem valorizam ouvir o quanto são importantes."/>
+        <!-- BOTÃO LER MAIS -->
+        <Button
+            android:id="@+id/btnReadMore"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Ler mais"
+            android:textColor="#FFF"
+            app:backgroundTint="@null"
+            android:background="@drawable/btn_gradient_red"/>
 
-        <!-- 2 -->
-        <TextView
-            style="@style/LoveTitle"
-            android:text="2. Tempo de Qualidade"/>
+        <!-- BOTÃO FAZER TESTE -->
+        <Button
+            android:id="@+id/btnStartTest"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Fazer o teste"
+            android:textColor="#FFF"
+            android:layout_marginTop="16dp"
+            app:backgroundTint="@null"
+            android:background="@drawable/btn_gradient_red"/>
 
-        <TextView
-            style="@style/LoveText"
-            android:text="Dar atenção total ao parceiro, compartilhar momentos significativos e conversas profundas sem distrações."/>
+        <!-- CONTEÚDO LER MAIS -->
+        <LinearLayout
+            android:id="@+id/layoutReadMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="24dp">
 
-        <!-- 3 -->
-        <TextView
-            style="@style/LoveTitle"
-            android:text="3. Atos de Serviço"/>
+            <!-- 1 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. Palavras de Afirmação"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
 
-        <TextView
-            style="@style/LoveText"
-            android:text="Demonstrar amor através de ações práticas, como ajudar em tarefas ou fazer algo que facilite a vida do parceiro."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="São demonstrações de carinho por meio de elogios, mensagens, incentivos e declarações sinceras. Para quem tem essa linguagem predominante, ouvir (ou ler) palavras de reconhecimento e carinho é essencial para se sentir amado(a).\n"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="4dp"
+                android:textAlignment="viewStart"/>
 
-        <!-- 4 -->
-        <TextView
-            style="@style/LoveTitle"
-            android:text="4. Presentes"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exemplos:\n\n• “Tenho orgulho de você.”\n\n• “Você é muito importante para mim.”\n\n• Mensagens espontâneas durante o dia."
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="24dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="4dp"
+                android:textAlignment="viewStart"/>
 
-        <TextView
-            style="@style/LoveText"
-            android:text="Oferecer algo simbólico que represente carinho e lembrança. O valor está no significado, não no preço."/>
 
-        <!-- 5 -->
-        <TextView
-            style="@style/LoveTitle"
-            android:text="5. Toque Físico"/>
+            <!-- 2 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. Tempo de Qualidade"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
 
-        <TextView
-            style="@style/LoveText"
-            android:text="Demonstrar amor através de abraços, beijos e contato físico que transmite segurança e proximidade."/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Refere-se à dedicação de atenção plena ao outro. Não é apenas estar junto, mas estar presente de verdade — sem distrações.\n"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="4dp"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exemplos:\n\n• Conversas profundas.\n\n• Combinar um horário para conversar sem interrupções, mesmo que seja por mensagem.\n\n• Planejar momentos especiais, mesmo à distância."
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="24dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="4dp"
+                android:textAlignment="viewStart"/>
+
+
+            <!-- 3 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. Receber Presentes"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aqui, o valor está no significado do gesto. O presente simboliza lembrança, cuidado e atenção aos detalhes.\n"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="4dp"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exemplos:\n\n• Enviar algo que a pessoa comentou que gostou.\n\n• Uma surpresa inesperada.\n\n• Um item simbólico que represente o relacionamento.\n\n• Algo feito com as próprias mãos."
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="24dp"/>
+
+
+            <!-- 4 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4. Atos de Serviço"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="São demonstrações de amor por meio de atitudes práticas que facilitam a vida do outro.\n"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exemplos:\n\n• Ajudar em uma tarefa importante.\n\n• Resolver algo que estava preocupando o parceiro.\n\n• Demonstrar apoio em momentos difíceis."
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="24dp"/>
+
+
+            <!-- 5 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5. Toque Físico"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Para algumas pessoas, o contato físico é a principal forma de conexão emocional.\n"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="4dp"
+                android:textAlignment="viewStart"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exemplos:\n\n• Abraços.\n\n• Beijos.\n\n• Gestos de carinho.\n\nEm relacionamentos à distância, essa linguagem pode ser desafiadora, mas pode ser trabalhada por meio da antecipação do reencontro e da valorização dos momentos presenciais."
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="24dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="4dp"
+                android:textAlignment="viewStart"/>
+
+
+            <!-- IMPORTÂNCIA -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Por que isso é importante?"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nem sempre demonstramos amor da forma que o outro precisa receber. Muitas vezes oferecemos aquilo que faz sentido para nós, mas não necessariamente para quem está ao nosso lado.\n\nDescobrir e compartilhar sua linguagem do amor melhora a comunicação, reduz frustrações, fortalece a conexão emocional e ajuda o casal a expressar carinho de forma mais intencional.\n\nEntender como você se sente amado(a) — e como seu parceiro(a) se sente amado(a) — é um passo importante para construir um relacionamento mais consciente, equilibrado e duradouro."
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="16dp"
+                android:justificationMode="inter_word"
+                android:lineSpacingExtra="6dp"
+                android:textAlignment="viewStart"/>
+
+        </LinearLayout>
+
+        <!-- QUIZ -->
+        <LinearLayout
+            android:id="@+id/layoutQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/txtQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="24dp"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/option1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radio_button_white"
+                    android:buttonTint="@null"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <RadioButton
+                    android:id="@+id/option2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radio_button_white"
+                    android:buttonTint="@null"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:padding="8dp"/>
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Próxima"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_gradient_red"
+                app:backgroundTint="@null"
+                android:textColor="#FFF"/>
+
+            <TextView
+                android:id="@+id/txtResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#4A6FA5"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
