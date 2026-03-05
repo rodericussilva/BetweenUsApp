@@ -46,6 +46,10 @@
             android:name=".LoveLanguageActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".EnterCodeActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>

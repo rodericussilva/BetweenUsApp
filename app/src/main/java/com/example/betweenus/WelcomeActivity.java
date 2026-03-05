@@ -1,6 +1,7 @@
 package com.example.betweenus;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,20 +29,20 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
         setContentView(R.layout.activity_welcome);
 
         btnRegister = findViewById(R.id.btnRegister);
         btnLogin = findViewById(R.id.btnLogin);
         btnHaveCode = findViewById(R.id.btnHaveCode);
 
-        // 🔥 Firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // 🔥 Configuração Google Sign-In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
                 GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -50,13 +51,16 @@ public class WelcomeActivity extends AppCompatActivity {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // 🔴 BOTÃO CRIAR CONTA
         btnRegister.setOnClickListener(v -> signInWithGoogle());
-
-        // 🔵 BOTÃO ENTRAR
         btnLogin.setOnClickListener(v -> signInWithGoogle());
 
-        // 🔥 SE JÁ ESTIVER LOGADO → PULAR WELCOME
+        btnHaveCode.setOnClickListener(v ->
+                startActivity(new Intent(
+                        WelcomeActivity.this,
+                        EnterCodeActivity.class
+                ))
+        );
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             checkIfUserExists(currentUser);
@@ -73,11 +77,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
-
             try {
                 GoogleSignInAccount account =
                         GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -86,7 +88,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account.getIdToken());
 
             } catch (ApiException e) {
-
                 Toast.makeText(this,
                         "Erro no login Google",
                         Toast.LENGTH_SHORT).show();
@@ -99,7 +100,8 @@ public class WelcomeActivity extends AppCompatActivity {
     // ====================================
     private void firebaseAuthWithGoogle(String idToken) {
 
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        AuthCredential credential =
+                GoogleAuthProvider.getCredential(idToken, null);
 
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
@@ -123,6 +125,18 @@ public class WelcomeActivity extends AppCompatActivity {
     // ====================================
     private void checkIfUserExists(FirebaseUser user) {
 
+        // 🔥 PRIMEIRO: verificar se existe código pendente
+        SharedPreferences prefs =
+                getSharedPreferences("BetweenUs", MODE_PRIVATE);
+
+        String pendingCoupleId =
+                prefs.getString("pendingCoupleId", null);
+
+        if (pendingCoupleId != null) {
+            linkUserToCouple(user.getUid(), pendingCoupleId);
+            prefs.edit().remove("pendingCoupleId").apply();
+        }
+
         db.collection("users")
                 .document(user.getUid())
                 .get()
@@ -135,7 +149,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
                         if (completed != null && completed) {
 
-                            // 🏠 PERFIL COMPLETO → HOME
                             startActivity(new Intent(
                                     this,
                                     HomeActivity.class
@@ -144,7 +157,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
                         } else {
 
-                            // 📝 PERFIL INCOMPLETO → ONBOARDING
                             startActivity(new Intent(
                                     this,
                                     OnboardingActivity.class
@@ -154,9 +166,56 @@ public class WelcomeActivity extends AppCompatActivity {
 
                     } else {
 
-                        // 🔴 USUÁRIO NOVO → CRIAR NO FIRESTORE
                         createUserInFirestore(user);
                     }
+                });
+    }
+
+    // ====================================
+    // VINCULAR USUÁRIO AO CASAL
+    // ====================================
+    private void linkUserToCouple(String userId, String coupleId) {
+
+        db.collection("couples")
+                .document(coupleId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+
+                    if (!documentSnapshot.exists()) return;
+
+                    String partner1Id =
+                            documentSnapshot.getString("partner1Id");
+
+                    String partner2Id =
+                            documentSnapshot.getString("partner2Id");
+
+                    WriteBatch batch = db.batch();
+
+                    DocumentReference coupleRef =
+                            db.collection("couples").document(coupleId);
+
+                    DocumentReference userRef =
+                            db.collection("users").document(userId);
+
+                    if (partner1Id == null) {
+
+                        batch.update(coupleRef,
+                                "partner1Id", userId);
+
+                    } else if (partner2Id == null &&
+                            !partner1Id.equals(userId)) {
+
+                        batch.update(coupleRef,
+                                "partner2Id", userId);
+
+                        batch.update(userRef,
+                                "partnerId", partner1Id);
+                    }
+
+                    batch.update(userRef,
+                            "coupleId", coupleId);
+
+                    batch.commit();
                 });
     }
 
@@ -170,7 +229,8 @@ public class WelcomeActivity extends AppCompatActivity {
         userData.put("name", user.getDisplayName());
         userData.put("email", user.getEmail());
         userData.put("photoUrl",
-                user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : "");
+                user.getPhotoUrl() != null ?
+                        user.getPhotoUrl().toString() : "");
 
         userData.put("birthDate", null);
         userData.put("gender", null);
@@ -189,7 +249,6 @@ public class WelcomeActivity extends AppCompatActivity {
                             "Conta criada ❤️",
                             Toast.LENGTH_LONG).show();
 
-                    // 🔥 ABRIR ONBOARDING
                     startActivity(new Intent(
                             WelcomeActivity.this,
                             OnboardingActivity.class
