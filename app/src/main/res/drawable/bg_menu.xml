@@ -6,9 +6,9 @@
 
     <!-- Cantos arredondados apenas em cima -->
     <corners
-        android:topLeftRadius="26dp"
-        android:topRightRadius="26dp"
-        android:bottomLeftRadius="0dp"
-        android:bottomRightRadius="0dp" />
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"
+        android:bottomLeftRadius="26dp"
+        android:bottomRightRadius="26dp" />
 
 </shape>
