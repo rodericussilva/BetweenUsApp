@@ -22,6 +22,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
+            <TextView
+                android:id="@+id/txtRelationshipCounter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="18dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="❤️ Calculando..."
+                android:textColor="#FFFFFF"
+                android:elevation="12dp"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:maxLines="3"/>
+
             <!-- 🖼️ BANNER -->
             <ImageView
                 android:id="@+id/imgBanner"
