@@ -50,6 +50,10 @@
             android:name=".EnterCodeActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".CoupleProfileActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
@@ -74,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
         btnMenu = findViewById(R.id.btnMenu);
 
         btnMenu.setOnClickListener(v ->
-                drawerLayout.openDrawer(navigationView)
+                drawerLayout.openDrawer(GravityCompat.START)
         );
 
         menuCalendar.setOnClickListener(v ->
@@ -94,11 +95,28 @@ public class HomeActivity extends AppCompatActivity {
 
             int id = item.getItemId();
 
-            if (id == R.id.navPairCode) {
-                startActivity(new Intent(this, PairCodeActivity.class));
+            // Perfil do casal
+            if (id == R.id.navCoupleProfile) {
+
+                Intent intent = new Intent(HomeActivity.this, CoupleProfileActivity.class);
+                startActivity(intent);
             }
 
-            drawerLayout.closeDrawers();
+            // Gerar código de pareamento
+            else if (id == R.id.navPairCode) {
+
+                Intent intent = new Intent(HomeActivity.this, PairCodeActivity.class);
+                startActivity(intent);
+            }
+
+            // Sobre o aplicativo
+            else if (id == R.id.navAbout) {
+
+                Toast.makeText(this, "Tela Sobre em desenvolvimento", Toast.LENGTH_SHORT).show();
+            }
+
+            drawerLayout.closeDrawer(navigationView);
+
             return true;
         });
 
