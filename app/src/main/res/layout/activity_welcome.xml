@@ -65,10 +65,10 @@
         android:layout_height="60dp"
         android:layout_above="@id/btnLogin"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_gradient_red"
         android:text="Tenho um código de pareamento"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:background="@drawable/btn_gradient_red"
+        android:textSize="16sp"
         app:backgroundTint="@null"
         app:cornerRadius="30dp" />
 
