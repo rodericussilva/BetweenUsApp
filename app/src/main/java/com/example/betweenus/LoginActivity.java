@@ -1,68 +1,228 @@
 package com.example.betweenus;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.signin.*;
+import com.google.android.gms.common.api.ApiException;
+import com.google.firebase.auth.*;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText editEmail;
-    private EditText editPassword;
-    private Button btnEnter;
-    private TextView txtCreateAccount;
-    private TextView txtForgot;
+    private Button btnCreateAccount;
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
         setContentView(R.layout.activity_login);
-        editEmail = findViewById(R.id.editEmail);
-        editPassword = findViewById(R.id.editPassword);
-        btnEnter = findViewById(R.id.btnEnter);
-        txtCreateAccount = findViewById(R.id.txtCreateAccount);
-        txtForgot = findViewById(R.id.txtForgot);
 
-        // 🔐 BOTÃO ENTRAR
-        btnEnter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnCreateAccount = findViewById(R.id.btnCreateAccount);
 
-                String email = editEmail.getText().toString().trim();
-                String password = editPassword.getText().toString().trim();
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-                    Toast.makeText(LoginActivity.this, "Preencha email e senha", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        // CONFIGURA GOOGLE SIGN IN
+        GoogleSignInOptions gso =
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
 
-                // 👉 Preparado para autenticação futura (Firebase/API)
-                Toast.makeText(LoginActivity.this, "Login preparado (sem backend ainda)", Toast.LENGTH_SHORT).show();
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
-                // 👉 Vai para HomeActivity (que já existe)
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        btnCreateAccount.setOnClickListener(v -> startGoogleLogin());
+    }
 
-        // 🆕 CRIAR CONTA (ainda não implementado)
-        txtCreateAccount.setOnClickListener(v ->
-                Toast.makeText(LoginActivity.this, "Tela de cadastro ainda não implementada", Toast.LENGTH_SHORT).show()
+    // ====================================
+    // LOGIN GOOGLE
+    // ====================================
+
+    private void startGoogleLogin() {
+
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+
+        launcher.launch(signInIntent);
+    }
+
+    private final ActivityResultLauncher<Intent> launcher =
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+
+                        if (result.getResultCode() == RESULT_OK) {
+
+                            Intent data = result.getData();
+
+                            try {
+
+                                GoogleSignInAccount account =
+                                        GoogleSignIn.getSignedInAccountFromIntent(data)
+                                                .getResult(ApiException.class);
+
+                                firebaseAuth(account.getIdToken());
+
+                            } catch (ApiException e) {
+
+                                Toast.makeText(this,
+                                        "Erro login Google",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+    // ====================================
+    // AUTENTICAR NO FIREBASE
+    // ====================================
+
+    private void firebaseAuth(String idToken) {
+
+        AuthCredential credential =
+                GoogleAuthProvider.getCredential(idToken, null);
+
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+
+                    if (task.isSuccessful()) {
+
+                        FirebaseUser user = mAuth.getCurrentUser();
+
+                        createUserFirestore(user);
+
+                    } else {
+
+                        Toast.makeText(this,
+                                "Falha na autenticação",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    // ====================================
+    // CRIAR USUÁRIO NO FIRESTORE
+    // ====================================
+
+    private void createUserFirestore(FirebaseUser user) {
+
+        if (user == null) return;
+
+        String uid = user.getUid();
+
+        SharedPreferences prefs =
+                getSharedPreferences("BetweenUs", MODE_PRIVATE);
+
+        String partnerId = prefs.getString("pendingPartnerId", null);
+
+        Map<String, Object> data = new HashMap<>();
+
+        data.put("name", user.getDisplayName());
+        data.put("email", user.getEmail());
+        data.put("photoUrl", user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : "");
+        data.put("createdAt", System.currentTimeMillis());
+        data.put("onboardingCompleted", false);
+        data.put("partnerId", partnerId);
+
+        db.collection("users")
+                .document(uid)
+                .set(data)
+                .addOnSuccessListener(unused -> {
+
+                    if (partnerId != null) {
+
+                        createCouple(uid, partnerId);
+
+                    } else {
+
+                        goToOnboarding();
+                    }
+
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this,
+                                "Erro ao salvar usuário",
+                                Toast.LENGTH_SHORT).show());
+    }
+
+    private void createCouple(String userId, String partnerId) {
+
+        Map<String, Object> couple = new HashMap<>();
+
+        couple.put("user1Id", partnerId);
+        couple.put("user2Id", userId);
+        couple.put("createdAt", System.currentTimeMillis());
+
+        db.collection("couples")
+                .add(couple)
+                .addOnSuccessListener(documentReference -> {
+
+                    String coupleId = documentReference.getId();
+
+                    updateUsersCouple(userId, partnerId, coupleId);
+
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this,
+                                "Erro ao criar casal",
+                                Toast.LENGTH_SHORT).show());
+    }
+
+    private void updateUsersCouple(String userId, String partnerId, String coupleId) {
+
+        Map<String, Object> update = new HashMap<>();
+
+        update.put("coupleId", coupleId);
+        update.put("pairCode", null);
+
+        db.collection("users")
+                .document(userId)
+                .update(update);
+
+        Map<String, Object> updatePartner = new HashMap<>();
+
+        updatePartner.put("partnerId", userId);
+        updatePartner.put("coupleId", coupleId);
+        updatePartner.put("pairCode", null);
+
+        db.collection("users")
+                .document(partnerId)
+                .update(updatePartner);
+
+        goToOnboarding();
+    }
+
+    // ====================================
+    // IR PARA ONBOARDING
+    // ====================================
+
+    private void goToOnboarding() {
+
+        Intent intent = new Intent(
+                LoginActivity.this,
+                OnboardingActivity.class
         );
 
-        // 🔑 RECUPERAR SENHA (ainda não implementado)
-        txtForgot.setOnClickListener(v ->
-                Toast.makeText(LoginActivity.this, "Recuperação ainda não implementada", Toast.LENGTH_SHORT).show()
-        );
+        startActivity(intent);
+        finish();
     }
 }
