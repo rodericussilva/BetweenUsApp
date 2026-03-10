@@ -32,12 +32,15 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
     }
 }
 
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
     // Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:34.9.0"))
@@ -47,6 +50,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.0.0")
 
     implementation("com.google.firebase:firebase-firestore")
+
+    implementation("com.kizitonwose.calendar:view:2.3.0")
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.drawerlayout:drawerlayout:1.2.0")
