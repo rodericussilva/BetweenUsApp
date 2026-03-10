@@ -78,8 +78,14 @@ public class HomeActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START)
         );
 
-        menuCalendar.setOnClickListener(v ->
-                Toast.makeText(this, "Abrir Calendário", Toast.LENGTH_SHORT).show());
+        menuCalendar.setOnClickListener(v -> {
+
+            startActivity(new Intent(
+                    HomeActivity.this,
+                    CalendarActivity.class
+            ));
+
+        });
 
         menuChat.setOnClickListener(v ->
                 Toast.makeText(this, "Abrir Chat", Toast.LENGTH_SHORT).show());
