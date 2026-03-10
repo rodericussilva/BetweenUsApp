@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -32,7 +33,6 @@ public class PairCodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 🔥 Remove a tarja preta
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -46,26 +46,19 @@ public class PairCodeActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        // 🔑 GERAR CÓDIGO
         btnGenerate.setOnClickListener(v -> generatePairCode());
-
-        // 📋 COPIAR CÓDIGO
         btnCopy.setOnClickListener(v -> copyCode());
     }
 
-    // ====================================
-    // 🔑 GERAR CÓDIGO COM SEGURANÇA
-    // ====================================
     private void generatePairCode() {
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        // 🚨 VERIFICA SE ESTÁ LOGADO
         if (user == null) {
             Toast.makeText(this,
                     "Usuário não autenticado",
                     Toast.LENGTH_LONG).show();
-            finish(); // volta pra tela anterior
+            finish();
             return;
         }
 
@@ -77,6 +70,7 @@ public class PairCodeActivity extends AppCompatActivity {
 
         Map<String, Object> data = new HashMap<>();
         data.put("pairCode", generatedCode);
+        data.put("pairCodeCreatedAt", FieldValue.serverTimestamp());
 
         db.collection("users")
                 .document(userId)
@@ -91,9 +85,6 @@ public class PairCodeActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show());
     }
 
-    // ====================================
-    // 📋 COPIAR CÓDIGO
-    // ====================================
     private void copyCode() {
 
         if (generatedCode.isEmpty()) {

@@ -44,28 +44,40 @@ public class EnterCodeActivity extends AppCompatActivity {
             return;
         }
 
-        db.collection("couples")
-                .whereEqualTo("code", code)
+        db.collection("users")
+                .whereEqualTo("pairCode", code)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
 
                     if (!queryDocumentSnapshots.isEmpty()) {
 
-                        String coupleId =
+                        String partnerUserId =
                                 queryDocumentSnapshots.getDocuments().get(0).getId();
 
-                        // 🔥 Salva temporariamente
+                        // salva temporariamente
                         SharedPreferences prefs =
                                 getSharedPreferences("BetweenUs", MODE_PRIVATE);
 
                         prefs.edit()
-                                .putString("pendingCoupleId", coupleId)
+                                .putString("pendingPartnerId", partnerUserId)
                                 .apply();
 
                         Toast.makeText(this,
                                 "Código válido ❤️",
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
 
+                        // 🔥 vai para login Google
+                        startActivity(new Intent(
+                                EnterCodeActivity.this,
+                                LoginActivity.class
+                        ));
+
+                        Intent intent = new Intent(
+                                EnterCodeActivity.this,
+                                LoginActivity.class
+                        );
+
+                        startActivity(intent);
                         finish();
 
                     } else {
@@ -74,6 +86,10 @@ public class EnterCodeActivity extends AppCompatActivity {
                                 "Código inválido",
                                 Toast.LENGTH_SHORT).show();
                     }
-                });
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this,
+                                "Erro ao validar código",
+                                Toast.LENGTH_SHORT).show());
     }
 }
