@@ -21,9 +21,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -36,6 +39,7 @@ public class CalendarActivity extends AppCompatActivity {
 
     private String coupleId;
     private String selectedDate;
+    private Set<String> daysWithEvents = new HashSet<>();
 
     private List<Event> eventList = new ArrayList<>();
     private EventAdapter adapter;
@@ -83,6 +87,13 @@ public class CalendarActivity extends AppCompatActivity {
 
             loadEventsOfDay(selectedDate);
 
+            if (daysWithEvents.contains(selectedDate)) {
+
+                Toast.makeText(this,
+                        "Este dia possui eventos",
+                        Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         loadCouple();
@@ -116,6 +127,7 @@ public class CalendarActivity extends AppCompatActivity {
                         if (coupleId != null) {
 
                             loadEventsOfDay(selectedDate);
+                            loadEventDates();
 
                         } else {
 
@@ -217,6 +229,8 @@ public class CalendarActivity extends AppCompatActivity {
                     Toast.makeText(this, "Erro ao salvar evento", Toast.LENGTH_LONG).show();
 
                 });
+
+        loadEventDates();
     }
 
     private void loadEventsOfDay(String date) {
@@ -237,11 +251,19 @@ public class CalendarActivity extends AppCompatActivity {
                         Event event = doc.toObject(Event.class);
 
                         if (event != null) {
-
                             event.id = doc.getId();
                             eventList.add(event);
                         }
                     }
+
+                    // ORDENA LOCALMENTE (sem precisar de índice)
+                    Collections.sort(eventList, (e1, e2) -> {
+
+                        String t1 = e1.time == null ? "" : e1.time;
+                        String t2 = e2.time == null ? "" : e2.time;
+
+                        return t1.compareTo(t2);
+                    });
 
                     adapter.notifyDataSetChanged();
 
@@ -249,8 +271,9 @@ public class CalendarActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
 
                     Toast.makeText(this,
-                            "Erro ao carregar eventos",
-                            Toast.LENGTH_SHORT).show();
+                            "Erro ao carregar eventos: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+
                 });
     }
 
@@ -305,6 +328,8 @@ public class CalendarActivity extends AppCompatActivity {
                     loadEventsOfDay(selectedDate);
 
                 });
+
+        loadEventDates();
     }
 
     private void showEditEventDialog(Event event) {
@@ -367,6 +392,32 @@ public class CalendarActivity extends AppCompatActivity {
                     Toast.makeText(this, "Evento atualizado", Toast.LENGTH_SHORT).show();
 
                     loadEventsOfDay(selectedDate);
+
+                });
+
+        loadEventDates();
+    }
+
+    private void loadEventDates() {
+
+        if (coupleId == null) return;
+
+        db.collection("couples")
+                .document(coupleId)
+                .collection("events")
+                .get()
+                .addOnSuccessListener(query -> {
+
+                    daysWithEvents.clear();
+
+                    for (DocumentSnapshot doc : query.getDocuments()) {
+
+                        String date = doc.getString("date");
+
+                        if (date != null) {
+                            daysWithEvents.add(date);
+                        }
+                    }
 
                 });
     }
