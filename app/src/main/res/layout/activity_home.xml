@@ -23,20 +23,35 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
+                android:id="@+id/txtNextDateCounter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="8dp"
+                android:elevation="12dp"
+                android:gravity="center"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="💖 Carregando encontro..."
+                android:textAlignment="center"
+                android:textColor="#090909"
+                android:textSize="14sp" />
+
+            <TextView
                 android:id="@+id/txtRelationshipCounter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginBottom="18dp"
+                android:elevation="12dp"
+                android:gravity="center"
+                android:maxLines="3"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:text="❤️ Calculando..."
-                android:textColor="#FFFFFF"
-                android:elevation="12dp"
-                android:textSize="14sp"
-                android:gravity="center"
                 android:textAlignment="center"
-                android:maxLines="3"/>
+                android:textColor="#090909"
+                android:textSize="14sp" />
 
             <!-- 🖼️ BANNER -->
             <ImageView
@@ -44,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/banner_placeholder"/>
+                android:src="@drawable/banner"/>
 
             <!-- 🍔 BOTÃO MENU -->
             <ImageView
@@ -87,7 +102,7 @@
                 android:layout_gravity="top|center_horizontal"
                 android:layout_marginTop="45dp"
                 android:elevation="8dp"
-                android:src="@drawable/hearts_dotted" />
+                 />
 
         </FrameLayout>
 

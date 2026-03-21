@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
     private ImageView imgUser, imgPartner;
 
     private TextView txtRelationshipCounter;
-
+    private TextView txtNextDateCounter;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -64,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
         imgPartner = findViewById(R.id.imgPartner);
 
         txtRelationshipCounter = findViewById(R.id.txtRelationshipCounter);
+        txtNextDateCounter = findViewById(R.id.txtNextDateCounter);
 
         menuCalendar = findViewById(R.id.menuCalendar);
         menuChat = findViewById(R.id.menuChat);
@@ -174,6 +175,7 @@ public class HomeActivity extends AppCompatActivity {
             public void run() {
 
                 updateRelationshipCounter();
+                loadNextDateEvent();
 
                 // atualiza a cada minuto
                 handler.postDelayed(this, 60000);
@@ -316,6 +318,80 @@ public class HomeActivity extends AppCompatActivity {
                                     }
                                 });
                     }
+                });
+    }
+
+    private void loadNextDateEvent() {
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null) return;
+
+        db.collection("users")
+                .document(currentUser.getUid())
+                .get()
+                .addOnSuccessListener(userDoc -> {
+
+                    String coupleId = userDoc.getString("coupleId");
+
+                    if (coupleId == null) return;
+
+                    db.collection("couples")
+                            .document(coupleId)
+                            .collection("events")
+                            .whereEqualTo("type", "Encontro ❤️")
+                            .get()
+                            .addOnSuccessListener(query -> {
+
+                                long now = System.currentTimeMillis();
+
+                                long closestDiff = Long.MAX_VALUE;
+                                String closestDate = null;
+
+                                for (com.google.firebase.firestore.DocumentSnapshot doc : query.getDocuments()) {
+
+                                    String dateStr = doc.getString("date");
+
+                                    if (dateStr == null) continue;
+
+                                    try {
+
+                                        String[] parts = dateStr.split("-");
+
+                                        int year = Integer.parseInt(parts[0]);
+                                        int month = Integer.parseInt(parts[1]) - 1;
+                                        int day = Integer.parseInt(parts[2]);
+
+                                        Calendar eventDate = Calendar.getInstance();
+                                        eventDate.set(year, month, day, 0, 0, 0);
+
+                                        long diff = eventDate.getTimeInMillis() - now;
+
+                                        if (diff > 0 && diff < closestDiff) {
+                                            closestDiff = diff;
+                                            closestDate = dateStr;
+                                        }
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                if (closestDate != null) {
+
+                                    long days = TimeUnit.MILLISECONDS.toDays(closestDiff);
+
+                                    String text = "Faltam " + days +
+                                            (days == 1 ? " dia" : " dias") +
+                                            " para o próximo encontro";
+
+                                    txtNextDateCounter.setText(text);
+
+                                } else {
+
+                                    txtNextDateCounter.setText("💖 Nenhum encontro marcado");
+                                }
+                            });
                 });
     }
 }
