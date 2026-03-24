@@ -37,11 +37,19 @@
         android:layout_marginBottom="100dp"
         android:background="@drawable/btn_gradient_red"
         app:backgroundTint="@null"
-        android:text="Criar Conta"
+
+        android:text="Criar conta com Google"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
+
         app:cornerRadius="30dp"
-        app:elevation="8dp" />
+        app:elevation="8dp"
+
+        app:icon="@drawable/ic_google"
+        app:iconGravity="start"
+        app:iconPadding="1dp"
+        app:iconSize="30dp"
+        app:iconTint="@null"/>
 
     <!-- BOTÃO ENTRAR -->
     <com.google.android.material.button.MaterialButton
@@ -52,11 +60,19 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/btn_gradient_red"
         app:backgroundTint="@null"
-        android:text="Entrar"
+
+        android:text="Entrar com Google"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
+
         app:cornerRadius="30dp"
-        app:elevation="8dp" />
+        app:elevation="8dp"
+
+        app:icon="@drawable/ic_google"
+        app:iconGravity="start"
+        app:iconPadding="1dp"
+        app:iconSize="30dp"
+        app:iconTint="@null"/>
 
     <!-- BOTÃO TENHO CÓDIGO -->
     <com.google.android.material.button.MaterialButton
