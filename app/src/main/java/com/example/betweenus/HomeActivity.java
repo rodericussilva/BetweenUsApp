@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private LinearLayout menuCalendar, menuChat, menuMural;
     private CardView cardLoveLanguage;
+    private CardView cardLoveDistance;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -43,7 +44,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private Date relationshipDate;
 
-    // 🔁 handler para atualizar contador
     private Handler handler = new Handler();
     private Runnable counterRunnable;
 
@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         menuChat = findViewById(R.id.menuChat);
         menuMural = findViewById(R.id.menuMural);
         cardLoveLanguage = findViewById(R.id.cardLoveLanguage);
+        cardLoveDistance = findViewById(R.id.cardLoveDistance);
 
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
@@ -89,13 +90,21 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         menuChat.setOnClickListener(v ->
-                Toast.makeText(this, "Abrir Chat", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(
+                        HomeActivity.this,
+                        ChatActivity.class
+                ))
+        );
 
         menuMural.setOnClickListener(v ->
                 Toast.makeText(this, "Abrir Mural", Toast.LENGTH_SHORT).show());
 
         cardLoveLanguage.setOnClickListener(v ->
                 startActivity(new Intent(this, LoveLanguageActivity.class))
+        );
+
+        cardLoveDistance.setOnClickListener(v ->
+                startActivity(new Intent(this, LoveDistanceActivity.class))
         );
 
         navigationView.setNavigationItemSelectedListener(item -> {

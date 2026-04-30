@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_welcome"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="32dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- TÍTULO -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Relacionamentos à Distância"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- INTRODUÇÃO -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estar longe fisicamente não significa estar distante emocionalmente. A conexão afetiva é construída diariamente, através de pequenos gestos, palavras e atitudes que reforçam o vínculo entre o casal. Nesta etapa, o foco é cultivar a intimidade e a sensação de proximidade, mesmo quando os quilômetros separam."
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="24dp"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="6dp"/>
+
+        <!-- 1 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comunicação intencional"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mais do que conversar, é importante ouvir com atenção e compartilhar sentimentos de forma aberta e sincera. Perguntar sobre o dia, dividir conquistas e até frustrações fortalece a confiança."
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="20dp"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="4dp"/>
+
+        <!-- 2 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rituais de conexão"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Criar hábitos exclusivos do casal, como uma chamada de vídeo antes de dormir, mensagens de bom dia ou assistir a um filme juntos online, ajuda a manter a rotina afetiva."
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="20dp"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="4dp"/>
+
+        <!-- 3 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Surpresas e carinho"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pequenos gestos inesperados, como enviar uma carta, uma playlist ou uma foto especial, mantêm viva a chama da relação."
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="20dp"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="4dp"/>
+
+        <!-- 4 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Planos futuros"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Falar sobre encontros, viagens ou projetos em comum dá ao casal a sensação de que o relacionamento está em movimento e tem direção."
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="20dp"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="4dp"/>
+
+        <!-- 5 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Valorização do presente"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reconhecer o esforço de ambos em manter o vínculo e celebrar cada momento compartilhado, mesmo virtualmente, reforça a importância da relação."
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="4dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
