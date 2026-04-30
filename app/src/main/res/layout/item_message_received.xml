@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="start"
-    android:padding="4dp">
+    android:padding="6dp">
 
-    <TextView
-        android:id="@+id/txtMessageReceived"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_message_received"
-        android:textColor="#000000"
-        android:textSize="16sp"/>
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <!-- TEXTO -->
+        <TextView
+            android:id="@+id/txtMessageReceived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <!-- HORA -->
+        <TextView
+            android:id="@+id/txtTimeReceived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="#555"
+            android:layout_gravity="end"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+
 </LinearLayout>

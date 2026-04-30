@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.*;
 import com.google.android.gms.common.api.ApiException;
 import com.google.firebase.auth.*;
 import com.google.firebase.firestore.*;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +43,18 @@ public class WelcomeActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener(token -> {
+
+                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    FirebaseFirestore.getInstance()
+                            .collection("users")
+                            .document(uid)
+                            .update("fcmToken", token);
+
+                });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
                 GoogleSignInOptions.DEFAULT_SIGN_IN)

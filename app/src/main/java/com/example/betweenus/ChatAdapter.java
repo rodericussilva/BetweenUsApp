@@ -4,13 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -56,46 +58,39 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         MessageModel msg = list.get(position);
 
+        // formatar hora
+        String time = "";
+        if (msg.getTimestamp() != null) {
+            Date date = msg.getTimestamp().toDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            time = sdf.format(date);
+        }
+
         if (holder instanceof SentHolder) {
 
-            SentHolder sentHolder = (SentHolder) holder;
+            SentHolder h = (SentHolder) holder;
 
-            // texto da mensagem
-            sentHolder.txtMessage.setText(msg.getText());
+            h.txtMessage.setText(msg.getText());
+            h.txtTime.setText(time);
 
-            // status visual estilo WhatsApp
-            String status = msg.getStatus();
-
-            if ("sending".equals(status)) {
-
-                sentHolder.imgStatus.setImageResource(R.drawable.ic_clock);
-
-            } else if ("sent".equals(status)) {
-
-                sentHolder.imgStatus.setImageResource(R.drawable.ic_check_one);
-
-            } else if ("delivered".equals(status)) {
-
-                sentHolder.imgStatus.setImageResource(R.drawable.ic_check_two);
-
-            } else if ("read".equals(status)) {
-
-                sentHolder.imgStatus.setImageResource(R.drawable.ic_check_read);
-
-            } else if ("error".equals(status)) {
-
-                sentHolder.imgStatus.setImageResource(R.drawable.ic_error);
-
-            } else {
-
-                sentHolder.imgStatus.setImageResource(R.drawable.ic_clock);
+            // STATUS estilo WhatsApp
+            if ("sending".equals(msg.getStatus())) {
+                h.txtStatus.setText("⏳");
+            } else if ("sent".equals(msg.getStatus())) {
+                h.txtStatus.setText("✓");
+            } else if ("delivered".equals(msg.getStatus())) {
+                h.txtStatus.setText("✓✓");
+            } else if ("read".equals(msg.getStatus())) {
+                h.txtStatus.setText("✓✓");
+                h.txtStatus.setTextColor(0xFF4FC3F7); // azul
             }
 
         } else {
 
-            ReceivedHolder receivedHolder = (ReceivedHolder) holder;
+            ReceivedHolder h = (ReceivedHolder) holder;
 
-            receivedHolder.txtMessage.setText(msg.getText());
+            h.txtMessage.setText(msg.getText());
+            h.txtTime.setText(time);
         }
     }
 
@@ -106,24 +101,26 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     static class SentHolder extends RecyclerView.ViewHolder {
 
-        TextView txtMessage;
-        ImageView imgStatus;
+        TextView txtMessage, txtTime, txtStatus;
 
         public SentHolder(@NonNull View itemView) {
             super(itemView);
 
             txtMessage = itemView.findViewById(R.id.txtMessageSent);
-            imgStatus = itemView.findViewById(R.id.imgStatus);
+            txtTime = itemView.findViewById(R.id.txtTimeSent);
+            txtStatus = itemView.findViewById(R.id.txtStatus);
         }
     }
 
     static class ReceivedHolder extends RecyclerView.ViewHolder {
 
-        TextView txtMessage;
+        TextView txtMessage, txtTime;
 
         public ReceivedHolder(@NonNull View itemView) {
             super(itemView);
+
             txtMessage = itemView.findViewById(R.id.txtMessageReceived);
+            txtTime = itemView.findViewById(R.id.txtTimeReceived);
         }
     }
 }

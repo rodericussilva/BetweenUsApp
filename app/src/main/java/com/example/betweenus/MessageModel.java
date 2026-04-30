@@ -6,7 +6,7 @@ public class MessageModel {
 
     private String text;
     private String senderId;
-    private Timestamp timestamp;
+    private com.google.firebase.Timestamp timestamp;
     private String status;
 
     public MessageModel() {}
@@ -19,7 +19,7 @@ public class MessageModel {
         return senderId;
     }
 
-    public Timestamp getTimestamp() {
+    public com.google.firebase.Timestamp getTimestamp() {
         return timestamp;
     }
 
